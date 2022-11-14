@@ -20,10 +20,10 @@ io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
   });
-  socket.on("add user", (id) => {
-    const users = addUserConnected(id, socket.id);
-    socket.emit("all users", users);
-  });
+  // socket.on("add user", (id) => {
+  //   const users = addUserConnected(id, socket.id);
+  //   socket.emit("all users", users);
+  // });
 });
 
 // async function addUserConnected(userId, socketId) {
