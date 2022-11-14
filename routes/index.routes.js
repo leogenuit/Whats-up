@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
-//const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoggedIn = require("../middleware/isLoggedIn");
 
 /* GET home page */
 router.get("/", isLoggedIn, (req, res, next) => {
-  res.render("index");
+  res.render("index", {
+    script: ["script", "socket"],
+  });
 });
 
 module.exports = router;
