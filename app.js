@@ -19,7 +19,13 @@ const app = express();
 require("./config")(app);
 
 // Socket.io initialization
-
+app.use((req, res, next) => {
+  if (req.session.currentUser) {
+    res.locals.currentUser = req.session.currentUser;
+    res.locals.isLoggedIn = true;
+  }
+  next();
+});
 const capitalize = require("./utils/capitalize");
 const projectName = "Whats-up";
 
@@ -34,7 +40,6 @@ app.use("/auth", authRoutes);
 
 const testRoutes = require("./routes/test.routes");
 app.use("/test", testRoutes);
-
 
 const profilRoutes = require("./routes/profil.routes");
 app.use("/profile", profilRoutes);

@@ -119,7 +119,7 @@ router.post("/login", (req, res, next) => {
           req.session.currentUser = user.toObject();
           // Remove the password field
           delete req.session.currentUser.password;
-
+          console.log;
           res.redirect("/profile");
         })
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
