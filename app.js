@@ -18,6 +18,8 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
+// Socket.io initialization
+
 const capitalize = require("./utils/capitalize");
 const projectName = "Whats-up";
 
@@ -29,6 +31,10 @@ app.use("/", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
+
+const testRoutes = require("./routes/test.routes");
+app.use("/test", testRoutes);
+
 
 const profilRoutes = require("./routes/profil.routes");
 app.use("/profile", profilRoutes);
