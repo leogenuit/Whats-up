@@ -28,6 +28,7 @@ router.post("/signup", (req, res) => {
   // Check that username, email, and password are provided
   if (username === "" || email === "" || password === "") {
     res.status(400).render("auth/signup", {
+      pagecss: "signup.css",
       errorMessage:
         "All fields are mandatory. Please provide your username, email and password.",
     });
@@ -37,6 +38,7 @@ router.post("/signup", (req, res) => {
 
   if (password.length < 6) {
     res.status(400).render("auth/signup", {
+      pagecss: "signup.css",
       errorMessage: "Your password needs to be at least 6 characters long.",
     });
 
@@ -58,6 +60,7 @@ router.post("/signup", (req, res) => {
         res.status(500).render("auth/signup", { errorMessage: error.message });
       } else if (error.code === 11000) {
         res.status(500).render("auth/signup", {
+          pagecss: "signup.css",
           errorMessage:
             "Username and email need to be unique. Provide a valid username or email.",
         });
@@ -74,11 +77,12 @@ router.get("/login", (req, res) => {
 
 // POST /auth/login
 router.post("/login", (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  if (email === "" || password === "") {
     res.status(400).render("auth/login", {
+      pagecss: "login.css",
       errorMessage:
         "All fields are mandatory. Please provide username, email and password.",
     });
@@ -86,22 +90,15 @@ router.post("/login", (req, res, next) => {
     return;
   }
 
-  // Here we use the same logic as above
-  // - either length based parameters or we check the strength of a password
-  if (password.length < 6) {
-    return res.status(400).render("auth/login", {
-      errorMessage: "Your password needs to be at least 6 characters long.",
-    });
-  }
-
   // Search the database for a user with the email submitted in the form
   User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send an error message that user provided wrong credentials
       if (!user) {
-        res
-          .status(400)
-          .render("auth/login", { errorMessage: "Wrong credentials." });
+        res.status(400).render("auth/login", {
+          pagecss: "login.css",
+          errorMessage: "Wrong credentials.",
+        });
         return;
       }
 
@@ -110,17 +107,17 @@ router.post("/login", (req, res, next) => {
         .compare(password, user.password)
         .then((isSamePassword) => {
           if (!isSamePassword) {
-            res
-              .status(400)
-              .render("auth/login", { errorMessage: "Wrong credentials." });
+            res.status(400).render("auth/login", {
+              pagecss: "login.css",
+              errorMessage: "Wrong credentials.",
+            });
             return;
           }
 
           // Add the user object to the session object
-          req.session.currentUser = user.toObject();
+          req.session.currentUser = user;
           // Remove the password field
           delete req.session.currentUser.password;
-          console.log;
           res.redirect("/profile");
         })
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
