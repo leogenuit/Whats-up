@@ -12,6 +12,13 @@ const userId = form.dataset.id;
 socket.on("connect", () => {
   const sessionID = socket.id;
   console.log(socket.id);
+  socket.emit("add user", userId);
+  console.log(userId);
+  // socket.emit("delete user", userId);
+  // socket.on("disconnect", () => {
+  //   console.log("disconnected");
+  //   socket.emit("delete user", userId);
+  // });
 });
 
 form.addEventListener("submit", function (e) {
@@ -23,12 +30,16 @@ form.addEventListener("submit", function (e) {
 });
 
 socket.on("chat message", function (msg) {
-  var item = document.createElement("li");
+  let item = document.createElement("li");
   item.textContent = msg;
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
 
-socket.emit("add user", userId);
+socket.on("all users", (users) => {
+  console.log(users);
+});
 
-socket.on("all users", (users) => {});
+socket.on("delete user", (user) => {
+  //console.log(user);
+});

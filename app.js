@@ -23,6 +23,8 @@ app.use((req, res, next) => {
   if (req.session.currentUser) {
     res.locals.currentUser = req.session.currentUser;
     res.locals.isLoggedIn = true;
+  } else {
+    console.log("pas de session on");
   }
   next();
 });
