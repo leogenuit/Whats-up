@@ -1,10 +1,10 @@
 <div id="form">
-  <form action="/auth/signup" method="POST">
+  <form action="/auth/login" method="POST">
          <input type="email" name="email" placeholder="Email" />
       <input type="password" name="password" placeholder="Password" />
     </div>
 
-    <img src="/images/enter.png" alt="" />
+<button type="submit"><img src="/images/enter.png" alt=""/></button>
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}
