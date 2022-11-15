@@ -1,24 +1,21 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Whats-up JS imported successfully!");
 });
 
 let socket = io();
-var messages = document.getElementById("messages");
-var form = document.getElementById("form");
-var input = document.getElementById("input");
+let messages = document.getElementById("messages");
+let form = document.getElementById("form");
+let input = document.getElementById("input");
+let listUsers = document.querySelector(".allsroom");
+
 const userId = form.dataset.id;
 
 socket.on("connect", () => {
   const sessionID = socket.id;
-  console.log(socket.id);
   socket.emit("add user", userId);
-  console.log(userId);
-  // socket.emit("delete user", userId);
-  // socket.on("disconnect", () => {
-  //   console.log("disconnected");
-  //   socket.emit("delete user", userId);
-  // });
+  socket.emit("chatroom on", userId);
 });
 
 form.addEventListener("submit", function (e) {
@@ -37,7 +34,18 @@ socket.on("chat message", function (msg) {
 });
 
 socket.on("all users", (users) => {
-  console.log(users);
+  //console.log(users);
+  users.forEach((element) => {
+    //console.log(element.user._id);
+    //if (!element.user._id === res.locals.currentUser) {
+    let div = document.createElement("div");
+    div.dataset.id = element.user._id;
+    console.log(div.dataset.id);
+    div.classList.add("room", "flex");
+    div.textContent = element.user.username;
+    listUsers.appendChild(div);
+    //}
+  });
 });
 
 socket.on("delete user", (user) => {

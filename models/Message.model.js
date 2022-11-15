@@ -3,7 +3,10 @@ const { Schema, model } = require("mongoose");
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const messageSchema = new Schema(
   {
-    author: {},
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     content: {
       type: String,
       required: true,
@@ -22,4 +25,4 @@ const messageSchema = new Schema(
 
 const Message = model("Message", messageSchema);
 
-module.exports = User;
+module.exports = Message;

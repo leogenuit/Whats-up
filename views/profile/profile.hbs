@@ -1,107 +1,29 @@
-<div class="sticky">
+<div>
   <div class="flex header">
-    <a class="arrow" href="/auth/login">⬅︎</a>
-    <p>Paul Ochon</p>
+    <a class="arrow" href="/auth/logout">⬅︎</a>
+    <p>{{currentUser.username}}</p>
     <img src="images/user.png" alt="" />
     {{!-- <hE>{{currentUser.username}}</hE> --}}
   </div>
 </div>
 <div class="allsroom">
-  <div class="room flex">
+  {{!-- <div class="room flex">
     <div class="contour-img">
       <img src="images/user.png" alt="" />
     </div>
     <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
       elit.
     </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
-  <div class="room flex">
-    <div class="contour-img">
-      <img src="images/user.png" alt="" />
-    </div>
-    <p class="few-words">Lorem, ipsum dolor sit amet consectetur adipisicing
-      elit.
-    </p>
-  </div>
+  </div> --}}
+    <form id="form" action="" data-id="{{currentUser._id}}" data-username="{{currentUser.username}}">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
 
+
+    <div class="connected-users">
+      <h2>Connected users</h2>
+      <ul class="connected-list">
+        
+      </ul>
+    </div>
 </div>
