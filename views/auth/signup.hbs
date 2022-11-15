@@ -1,27 +1,15 @@
 <div id="form">
-  <h2>Sign Up</h2>
-  <a href="/auth/login">Login</a>
   <form action="/auth/signup" method="POST">
+    <div>
+      <input type="text" name="username" placeholder="Username" />
+      <input type="email" name="email" placeholder="Email" />
+      <input type="password" name="password" placeholder="Password" />
+    </div>
 
-    <label>
-      Username
-      <input type="text" name="username" placeholder="Your username" />
-    </label>
-
-    <label>
-      Email
-      <input type="email" name="email" placeholder="Your email" />
-    </label>
-
-    <label>
-      Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
-
-    <button type="submit">Sign Up</button>
-
+    <img src="/images/add-user.png" alt="" />
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}
   </form>
+  <p>© Copyright by @jeannelefevre - @leogenuit 2022 </p>
 </div>
