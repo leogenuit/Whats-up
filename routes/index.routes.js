@@ -4,7 +4,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 /* GET home page */
 router.get("/", isLoggedIn, (req, res, next) => {
-  res.render("index", {
+  res.render("", {
     script: ["script", "socket"],
   });
 });
