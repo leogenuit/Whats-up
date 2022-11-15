@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+input {
+  display: block;
+  margin: 15px auto;
+  border-radius: 20px;
+  height: 50px;
+  width: 300px;
+  box-shadow: 2px 2px 5px gray;
+  padding: 10px 10px 4px 10px;
+
+  border-style: none;
+}
+#form {
+  margin-top: 90%;
+}
+p {
+  color: black;
+  font-size: 10px;
+  text-align: center;
+  margin-top: 130px;
+}
+img {
+  display: flex;
+  justify-content: center;
+  margin: 123px auto;
+  width: 100px;
+  height: 100px;
+}
+input::placeholder {
+  color: rgb(202, 199, 199);
+  font-size: 25px;
+}
+body {
+  background-image: url("/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
