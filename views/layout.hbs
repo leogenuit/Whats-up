@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{appTitle}}</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/sticky.js"></script>
     {{#each script}}
-    <script type="module" src="/js/{{this}}.js"></script>
+      <script type="module" src="/js/{{this}}.js"></script>
     {{/each}}
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/{{pagecss}}" />
   </head>
 
   <body>
