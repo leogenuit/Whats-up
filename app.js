@@ -34,8 +34,8 @@ const projectName = "Whats-up";
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
 // 👇 Start handling routes here
-const indexRoutes = require("./routes/index.routes");
-app.use("/", indexRoutes);
+// const indexRoutes = require("./routes/index.routes");
+// app.use("/", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
@@ -44,7 +44,7 @@ const testRoutes = require("./routes/test.routes");
 app.use("/test", testRoutes);
 
 const profilRoutes = require("./routes/profil.routes");
-app.use("/profile", profilRoutes);
+app.use("/", profilRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

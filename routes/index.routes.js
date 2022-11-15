@@ -4,9 +4,8 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 /* GET home page */
 router.get("/", isLoggedIn, (req, res, next) => {
-  res.render("index", {
-    script: ["script", "socket"],
-  });
+  res.redirect("/profile");
+  //res.redirect("/auth/signup");
 });
 
 module.exports = router;
