@@ -19,14 +19,23 @@ body {
   align-items: center;
   height: 120px;
   width: 100%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
-.search-bar {
-  padding: 20px;
+.header .user-picture {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  border-radius: 5%;
 }
-.search-bar input {
-  width: 100%;
-  margin: 0 auto;
-  height: 40px;
+.header .user-picture:hover {
+  height: 52px;
+  width: 52px;
+  padding: 10px;
+  border-radius: 5%;
+}
+#username::first-letter {
+  text-transform: uppercase;
 }
 .container {
   width: 100%;
@@ -35,14 +44,9 @@ body {
   display: flex;
 }
 
-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-}
 .allsroom {
   background: rgba(255, 255, 255, 0.6);
-  height: 80%;
+  height: 100%;
 }
 .room {
   border: 1px solid rgb(207, 207, 207, 0.6);
@@ -55,7 +59,7 @@ img {
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  border: 1px solid black;
+  box-shadow: 1px 1px 6px black;
 }
 .few-words {
   margin-left: 10px;
@@ -65,4 +69,15 @@ img {
   top: 0;
   width: 100%;
   margin-top: 0px;
+}
+.logout {
+  text-decoration: none;
+  color: red;
+  padding: 5px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 1px 1px 6px black;
+  font-size: 12px;
+}
+.img-card {
 }
