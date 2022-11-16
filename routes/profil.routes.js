@@ -40,7 +40,7 @@ router.post(
     // update
     req.session.currentUser = updatedUser;
     // redirection un fois terminé
-    res.redirect("/profile");
+    res.redirect("/");
   }
 );
 
