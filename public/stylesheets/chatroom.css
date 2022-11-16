@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url("/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
+}
+
+header .user-picture {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  border-radius: 5%;
+}
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 15%;
+  border-bottom: 1px solid rgb(212, 212, 212);
+  background: #fff;
+}
+footer {
+  border-top: 1px solid rgb(212, 212, 212);
+  background: white;
+  position: absolute;
+  width: 100%;
+  height: 15%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.footer-container {
+  margin: 0 auto;
+  width: 90%;
+}
+footer input {
+  width: 100%;
+  margin-top: 50px;
+  height: 20%;
+}

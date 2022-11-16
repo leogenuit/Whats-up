@@ -46,6 +46,9 @@ app.use("/test", testRoutes);
 const profilRoutes = require("./routes/profil.routes");
 app.use("/", profilRoutes);
 
+const chatroomRoutes = require("./routes/chatroom.routes");
+app.use("/", chatroomRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
