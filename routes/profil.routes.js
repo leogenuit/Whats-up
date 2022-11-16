@@ -4,11 +4,10 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 const uploader = require("../config/cloudinary.config");
 const User = require("../models/User.model");
 router.get("/", isLoggedIn, (req, res, next) => {
-  try {
-    res.render("profile/profile", { pagecss: "profile.css" });
-  } catch (error) {
-    next(error);
-  }
+  res.render("profile/profile", {
+    script: ["script", "socket"],
+    pagecss: "profile.css",
+  });
 });
 
 router.get("/update", isLoggedIn, (req, res, next) => {
