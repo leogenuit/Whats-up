@@ -29,6 +29,11 @@ io.on("connection", (socket) => {
     //console.log(userId);
   });
 
+  socket.on("get messages", async (id, foreignId) => {
+    const messages = await getAllMessages(id, foreignId);
+    io.emit("all messages", messages);
+  });
+
   socket.on("chat message", async (msg, id, foreignId) => {
     const message = await createNewMessage(msg, id, foreignId);
     io.emit("chat message", msg);
@@ -57,11 +62,21 @@ async function openChatroom(foreignId, userId) {
   }
 }
 
+async function getAllMessages(id, foreignId) {
+  const getChatroom = await Chatroom.findOne({
+    users: { $all: [foreignId, id] },
+  }).populate("users");
+
+  const allMessages = await Message.find({
+    chatroom: getChatroom._id,
+  }).populate("author");
+  return allMessages;
+}
+
 async function createNewMessage(msg, id, foreignId) {
   const getChatroom = await Chatroom.findOne({
     users: { $all: [foreignId, id] },
   }).populate("users");
-  console.log(getChatroom._id);
 
   await Message.create({
     content: msg,
