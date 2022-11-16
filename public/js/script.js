@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let socket = io();
-let messages = document.getElementById("messages");
+let messages = document.querySelector("ul");
 let form = document.getElementById("form");
 let input = document.getElementById("input");
 let listUsers = document.querySelector(".allsroom");
@@ -18,34 +18,37 @@ socket.on("connect", () => {
   socket.emit("chatroom on", userId);
 });
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  if (input.value) {
-    socket.emit("chat message", input.value);
-    input.value = "";
-  }
+socket.on("all users", (users) => {
+  //console.log(users);
+  users.forEach((element) => {
+    let a = document.createElement("a");
+    a.classList.add("room", "flex");
+    a.dataset.id = element.user._id;
+    a.textContent = element.user.username;
+    listUsers.appendChild(a);
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      console.log(a.dataset.id);
+      socket.emit("chatroom on", a.dataset.id, userId);
+    });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (input.value) {
+        socket.emit("chat message", input.value, userId, a.dataset.id);
+        input.value = "";
+      }
+    });
+  });
 });
 
 socket.on("chat message", function (msg) {
+  msg.forEach((element) => {
+    console.log(element);
+  });
   let item = document.createElement("li");
   item.textContent = msg;
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
-});
-
-socket.on("all users", (users) => {
-  //console.log(users);
-  users.forEach((element) => {
-    //console.log(element.user._id);
-    //if (!element.user._id === res.locals.currentUser) {
-    let div = document.createElement("div");
-    div.dataset.id = element.user._id;
-    console.log(div.dataset.id);
-    div.classList.add("room", "flex");
-    div.textContent = element.user.username;
-    listUsers.appendChild(div);
-    //}
-  });
 });
 
 socket.on("delete user", (user) => {
