@@ -1,0 +1,18 @@
+<h1>edit picture</h1>
+
+<form method="post" action="/profile/update" enctype="multipart/form-data">
+  <label for="picture">picture</label>
+  <input type="file" name="picture" id="picture" />
+  <button>👍</button>
+</form>
+
+<hr />
+
+<ul>
+  {{#each files}}
+    <li>
+      <h2>{{this.name}}</h2>
+      <img src="{{this.URL}}" alt="a cool graphic" style="width: 128px" />
+    </li>
+  {{/each}}
+</ul>
