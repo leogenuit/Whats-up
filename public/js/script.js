@@ -30,6 +30,7 @@ socket.on("all users", (users) => {
       e.preventDefault();
       console.log(a.dataset.id);
       socket.emit("chatroom on", a.dataset.id, userId);
+      socket.emit("get messages", userId, a.dataset.id);
     });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -41,10 +42,14 @@ socket.on("all users", (users) => {
   });
 });
 
-socket.on("chat message", function (msg) {
+socket.on("all messages", function (msg) {
   msg.forEach((element) => {
-    console.log(element);
+    console.log(element.content);
+    console.log(element.author.username);
   });
+});
+
+socket.on("chat message", function (msg) {
   let item = document.createElement("li");
   item.textContent = msg;
   messages.appendChild(item);
