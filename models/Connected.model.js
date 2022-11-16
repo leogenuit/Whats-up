@@ -1,20 +1,15 @@
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
-const messageSchema = new Schema(
+const ConnectedSchema = new Schema(
   {
-    author: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    content: {
+
+    socketId: {
       type: String,
-      required: true,
-      unique: true,
-    },
-    chatroom: {
-      type: Schema.Types.ObjectId,
-      ref: "Chatroom",
     },
   },
   {
@@ -23,6 +18,6 @@ const messageSchema = new Schema(
   }
 );
 
-const Message = model("Message", messageSchema);
+const Connected = model("Connected", ConnectedSchema);
 
-module.exports = Message;
+module.exports = Connected;
