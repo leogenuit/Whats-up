@@ -24,9 +24,14 @@ const userSchema = new Schema(
       type: String,
       default: "/images/add.png",
     },
-    friends: {
-      type: String,
-    },
+    friends: [
+      {
+        friend: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+      },
+    ],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

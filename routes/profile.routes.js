@@ -12,62 +12,53 @@ router.get("/", isLoggedIn, (req, res, next) => {
   });
 });
 
-router.get("/edit/picture", isLoggedIn, (req, res, next) => {
-  try {
-    res.render("profile/edit-picture", { pagecss: "profile-edit.css" });
-  } catch (error) {
-    next(error);
-  }
-});
-
-// add form to update an image
-router.post(
-  // vers la route update
-  "/update",
-  // verifie si le user est log
-  isLoggedIn,
-
-  uploader.single("picture"),
-  async (req, res, next) => {
-    const updatedUser = await User.findByIdAndUpdate(
-      // get le currentuser via l'id
-      req.session.currentUser._id,
-      {
-        // get le path de la picture
-        picture: req.file.path,
-      },
-      // valide immédiatement le changement
-      { new: true }
-    );
-    // update
-    req.session.currentUser = updatedUser;
-    // redirection un fois terminé
-    res.redirect("/");
-  }
-);
-
-router.get("/edit/username", async (req, res, next) => {
-  try {
-    //const user = await User.findById(req.params.id);
-
-    res.render("profile/edit-username");
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.post("/edit/username", async (req, res, next) => {
+router.post("/edit", async (req, res, next) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.session.currentUser._id,
       req.body,
+
       {
         new: true,
       }
     );
     req.session.currentUser = updatedUser;
+    res.redirect("/");
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/edit", isLoggedIn, (req, res, next) => {
+  try {
+    res.render("profile/edit", { pagecss: "profile-edit.css" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post(
+  "/edit/picture",
+  isLoggedIn,
+  uploader.single("picture"),
+  async (req, res, next) => {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.session.currentUser._id,
+      {
+        picture: req.file.path,
+      },
+      { new: true }
+    );
+    req.session.currentUser = updatedUser;
 
     res.redirect("/");
+  }
+);
+
+router.get("/:id/delete", async (req, res, next) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.redirect("/auth/signup");
   } catch (error) {
     next(error);
   }
