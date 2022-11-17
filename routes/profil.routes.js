@@ -32,7 +32,7 @@ router.post(
       req.session.currentUser._id,
       {
         // get le path de la picture
-        //picture: req.file.path,
+        picture: req.file.path,
       },
       // valide immédiatement le changement
       { new: true }
