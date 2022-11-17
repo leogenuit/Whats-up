@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.arrow {
+  width: 20px;
+  height: 20px;
+}
+.container {
+  margin: 10px auto;
+  width: 90%;
+}
+#form {
+  width: 100%;
+  margin-top: 50px;
+}
+input#username {
+  width: 50%;
+  margin: 10px auto;
+}
+button#username {
+  width: 20%;
+}
+input#picture {
+  width: 50%;
+}

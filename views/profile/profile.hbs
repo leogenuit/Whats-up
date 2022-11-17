@@ -5,26 +5,24 @@
     <a href="/edit"><img src="images/reglage.png" alt="" /></a>
   </div>
 </div>
- <form action="/users/search" method="GET">
+<form action="/users/search" method="GET">
 
-    <input type="search" name="username" placeholder="Search ..." id="search" />
-    <button>Search</button>
+  <input type="search" name="username" placeholder="Search ..." id="search" />
+  <button>Search</button>
 
-  </form>
+</form>
 
+{{#if foundUser}}
+  <img src={{foundUser.picture}} alt="" />
+  <p>{{foundUser.username}}</p>
+  <form action="/users/{{foundUser._id}}/add" method="post"><input
+      type="submit"
+      value="Add"
+    /></form>
+{{/if}}
 
-  {{#if foundUser}}
-    <img src={{foundUser.picture}} alt="" />
-    <p>{{foundUser.username}}</p>
-    <form action="/users/{{foundUser._id}}/add" method="post"><input
-        type="submit"
-        value="Add"
-      /></form>
-  {{/if}}
-
-{{!-- <div class="allsroom">
-  </div> --}}
-
+{{! <div class="allsroom">
+  </div> }}
 
 <div class="allsroom connected">
 
@@ -33,13 +31,13 @@
 
 </div>
 
-{{!-- <div class="allsroom">
+{{! <div class="allsroom">
 
 git push --set-upstream origin lastPush
-</div> --}}
+</div> }}
 
 <div class="dedicatedRoom hidden">
-   <button class="back">❌</button>
+  <button class="back">❌</button>
   <div class="messages"></div>
   <form
     id="form"
