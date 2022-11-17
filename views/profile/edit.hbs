@@ -1,0 +1,26 @@
+<a href="/">retour</a>
+<form action="/edit" method="post">
+  <input type="text" name="username" value="{{currentUser.username}}" />
+  <button>Update username</button>
+</form>
+
+<form action="/edit/picture" method="post" enctype="multipart/form-data">
+  <input type="file" name="picture" id="picture" />
+  <button>Valider</button>
+</form>
+
+<ul>
+  {{#each files}}
+    <li>
+      <h2>{{this.name}}</h2>
+      <img src="{{this.URL}}" alt="a cool graphic" style="width: 128px" />
+    </li>
+  {{/each}}
+</ul>
+
+<a class="logout" class="arrow" href="/auth/login">Logout</a>
+
+<a
+  href="/{{currentUser._id}}/delete"
+  onclick="return confirm('⚠️ Are you sure to delete your account this action is irrevesible ⚠️')"
+>Delete</a>
