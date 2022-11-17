@@ -3,6 +3,7 @@ const router = express.Router();
 const isLoggedIn = require("../middleware/isLoggedIn");
 const uploader = require("../config/cloudinary.config");
 const User = require("../models/User.model");
+const Connected = require("../models/Connected.model");
 
 router.get("/", isLoggedIn, (req, res, next) => {
   res.render("profile/profile", {
@@ -72,4 +73,11 @@ router.post("/edit/username", async (req, res, next) => {
   }
 });
 
+router.get("/socket/:id", async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id);
+  const user = await Connected.findOne({ user: id });
+  console.log(user);
+  return res.json(user);
+});
 module.exports = router;

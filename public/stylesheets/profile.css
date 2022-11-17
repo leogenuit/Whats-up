@@ -91,6 +91,10 @@ img {
   display: none !important;
 }
 
+h2 { 
+  padding: 15px;
+}
+
 #form {
   border-top: 1px solid rgb(212, 212, 212);
   background: white;
@@ -103,6 +107,7 @@ img {
   align-items: center;
   justify-content: center;
   padding: 50px;
+  position: fixed;
 }
 
 #form input {
@@ -114,11 +119,21 @@ img {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 160px);
-  padding-top: 150px;
+  padding: 15px;
   background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ), url(/images/bg.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-attachment: fixed;
+}
+
+.back {
+  background: none;
+  border: none;
+  float: right;
+  text-align: right;
+  width: 100%;
+  position: fixed;
+  right: 15px;
 }
 
 .grey {
@@ -131,4 +146,18 @@ img {
   background-repeat: no-repeat;
   background-size: contain;
   background-attachment: fixed; */
+}
+
+.message-container {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.message-content {
+  margin-top: 10px;
+}
+
+small {
+  font-size: 11px;
+  font-style: italic;
 }
