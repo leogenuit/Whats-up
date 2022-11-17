@@ -8,6 +8,7 @@ const Connected = require("./models/Connected.model");
 const Chatroom = require("./models/Chatroom.model");
 const Message = require("./models/Message.model");
 const User = require("./models/User.model");
+const axios = require("axios");
 
 // ℹ️ Sets the PORT for our app to have access to it. If no env has been set, we hard code it to 3000
 const PORT = process.env.PORT || 3000;
@@ -27,21 +28,35 @@ io.on("connection", (socket) => {
     socket.emit("all users disconnected", users);
   });
 
+  io.of("/").adapter.on("join-room", (room, id) => {
+    console.log(`socket ${id} has joined room ${room}`);
+  });
   socket.on("chatroom on", async (foreignId, userId) => {
     const chatroom = await openChatroom(foreignId, userId);
-    socket.emit("all chatroom", chatroom);
+    console.log("heeeey");
+    socket.emit("one chatroom", chatroom);
   });
 
   socket.on("some room", async (foreignId, userId) => {
     const chatroom = await getChatroom(foreignId, userId);
     socket.emit("off chatroom", chatroom);
-    console.log(chatroom);
+    //console.log(chatroom);
   });
 
-  socket.on("chat message", async (msg, id, foreignId) => {
+  socket.on("chat message", async (msg, id, foreignId, room) => {
+    console.log(foreignId);
+    const receiver = await fetchSocket(foreignId);
     const message = await createNewMessage(msg, id, foreignId);
+    console.log(message);
+    //io.to(receiver).emit("chat message", message);
     io.emit("chat message", message);
   });
+
+  // socket.on("private message", async (id, foreignId, msg) => {
+  //   console.log(msg);
+  //   const message = await createNewMessage(id, foreignId, msg);
+  //   io.emit("private message", message);
+  // });
 
   socket.on("get messages", async (id, foreignId) => {
     const messages = await getAllMessages(id, foreignId);
@@ -90,8 +105,10 @@ async function openChatroom(foreignId, userId) {
     users: { $all: [foreignId, userId] },
   });
   if (chatroom) {
+    return chatroom;
   } else {
-    await Chatroom.create({ users: [foreignId, userId] });
+    const created = await Chatroom.create({ users: [foreignId, userId] });
+    return created;
   }
 }
 
@@ -112,7 +129,7 @@ async function createNewMessage(msg, id, foreignId) {
     author: id,
     chatroom: getChatroom._id,
   });
-  return await Message.findById(createdMessage.id);
+  return await Message.findById(createdMessage.id).populate("author");
 }
 
 async function getAllMessages(id, foreignId) {
@@ -125,6 +142,11 @@ async function getAllMessages(id, foreignId) {
   }).populate("author");
 
   return allMessages;
+}
+
+async function fetchSocket(id) {
+  const rawRes = await axios.get("http://localhost:3000/socket/" + id);
+  return rawRes.data.socketId;
 }
 
 server.listen(3000, () => {

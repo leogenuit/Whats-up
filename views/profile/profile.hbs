@@ -5,19 +5,14 @@
     <a href="/edit"><img src="images/reglage.png" alt="" /></a>
   </div>
 </div>
-
-
-<div class="allsroom connected">
-</div>
-<div class="disconnected">
-
-<div>
-  <form action="/users/search" method="GET">
+ <form action="/users/search" method="GET">
 
     <input type="search" name="username" placeholder="Search ..." id="search" />
     <button>Search</button>
 
   </form>
+<<<<<<< HEAD
+=======
 
   {{#if foundUser}}
     <img src={{foundUser.picture}} alt="" />
@@ -30,11 +25,23 @@
 
 </div>
 <div class="allsroom">
+>>>>>>> main
 
+
+<div class="allsroom connected">
+
+</div>
+<div class="disconnected">
 
 </div>
 
+{{!-- <div class="allsroom">
+
+
+</div> --}}
+
 <div class="dedicatedRoom hidden">
+   <button class="back">❌</button>
   <div class="messages"></div>
   <form
     id="form"
