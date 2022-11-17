@@ -48,7 +48,7 @@ body {
   background: rgba(255, 255, 255, 0.6);
   /* height: 100%; */
   min-height: 350px;
-  margin-top: 150px;
+  //margin-top: 150px;
 }
 .room {
   border: 1px solid rgb(207, 207, 207, 0.6);
@@ -160,4 +160,67 @@ h2 {
 small {
   font-size: 11px;
   font-style: italic;
+}
+
+
+/*
+*/
+
+.friends {    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.friends-list {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friends-list img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 6px black;
+}
+
+.friends-list p {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.friends form {
+  width: 100%;
+  position: relative;
+}
+
+.friends input {
+  width: 100%;
+  height: 30px;
+}
+
+.friends button {
+  height: 30px;
+  position: absolute;
+  background: white;
+  right: 0px;
+  width: 30px;
+  border: black;
+  border-width: 1px;
+  border-style: inset;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
+
+.add-friend  button {
+  width: 100%;
+  height: 100%;
+  position: unset;
+   background: none;
+   border: none;
 }
