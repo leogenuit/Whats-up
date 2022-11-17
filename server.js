@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
 
   socket.on("chat message", async (msg, id, foreignId) => {
     const message = await createNewMessage(msg, id, foreignId);
-    io.emit("chat message", msg);
+    io.emit("chat message", message);
   });
 });
 
@@ -78,11 +78,12 @@ async function createNewMessage(msg, id, foreignId) {
     users: { $all: [foreignId, id] },
   }).populate("users");
 
-  await Message.create({
+  const createdMessage = await Message.create({
     content: msg,
     author: id,
     chatroom: getChatroom._id,
   });
+  return await Message.findById(createdMessage.id);
 }
 
 server.listen(3000, () => {

@@ -3,6 +3,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Whats-up JS imported successfully!");
 });
+const allRooms = document.querySelector(".allsroom");
+const dedicatedRoom = document.querySelector(".dedicatedRoom");
+const messageTemplate = document.getElementById("message-template");
+const messagesContainer = document.querySelector("ul.messages");
 
 let socket = io();
 let messages = document.querySelector("ul");
@@ -43,19 +47,33 @@ socket.on("all users", (users) => {
 });
 
 socket.on("all messages", function (msg) {
+  allRooms.classList.add("hidden");
+  dedicatedRoom.classList.remove("hidden");
+
   msg.forEach((element) => {
-    console.log(element.content);
-    console.log(element.author.username);
+    formatMessage(element);
+    // console.log(element.content);
+
+    // console.log(element.author.username);
   });
 });
 
 socket.on("chat message", function (msg) {
-  let item = document.createElement("li");
-  item.textContent = msg;
-  messages.appendChild(item);
-  window.scrollTo(0, document.body.scrollHeight);
+  formatMessage(msg);
+  // let item = document.createElement("li");
+  // item.textContent = msg;
+  // messages.appendChild(item);
+  // window.scrollTo(0, document.body.scrollHeight);
 });
 
 socket.on("delete user", (user) => {
   //console.log(user);
 });
+
+function formatMessage(element) {
+  const clone = messageTemplate.content.cloneNode(true);
+  clone.querySelector("img").href = element.author.picture;
+  clone.querySelector("p").textContent = element.content;
+  clone.querySelector("small").textContent = element.createdAt;
+  messagesContainer.append(clone);
+}
