@@ -24,6 +24,9 @@ const userSchema = new Schema(
       type: String,
       default: "/images/add.png",
     },
+    friends: {
+      type: String,
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
