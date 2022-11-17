@@ -11,6 +11,11 @@
   </div>
 </div>
 
+
+<div class="allsroom connected">
+</div>
+<div class="disconnected">
+
 <div>
   <form action="/users/search" method="GET">
 
@@ -21,10 +26,11 @@
 </div>
 <div class="allsroom">
 
+
 </div>
 
 <div class="dedicatedRoom hidden">
-  <ul class="messages"></ul>
+  <div class="messages"></div>
   <form
     id="form"
     action=""
@@ -34,8 +40,6 @@
     <input id="input" autocomplete="off" /><button>Send</button>
   </form>
 </div>
-
-<a href="/chatroom">chatroom</a>
 
 <template id="message-template">
   <div class="message-container">
