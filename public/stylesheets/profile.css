@@ -106,19 +106,27 @@ img {
 
 #form input {
   height: 25px;
-  width: 100%
+  width: 100%;
 }
 
 .dedicatedRoom {
-display: flex;
-flex-direction: column;
-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 160px);
 }
 
 .messages {
   flex-grow: 1;
-  background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ), url(/images/bg.png);
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url(/images/bg.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-attachment: fixed;
+}
+
+.message-container {
+  margin: 20px;
 }
