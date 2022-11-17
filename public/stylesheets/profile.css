@@ -8,12 +8,12 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-attachment: fixed;
-  padding-top: 300px;
+  padding-top: 120px;
 }
 .header {
   background: rgb(255, 255, 255);
   padding: 20px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border: 1px solid rgb(207, 207, 207);
   justify-content: space-around;
   align-items: center;
@@ -47,6 +47,7 @@ body {
 .allsroom {
   background: rgba(255, 255, 255, 0.6);
   height: 100%;
+  margin-top: 150px;
 }
 .room {
   border: 1px solid rgb(207, 207, 207, 0.6);
@@ -80,4 +81,44 @@ img {
   font-size: 12px;
 }
 .img-card {
+}
+
+/*
+*/
+
+.hidden {
+  display: none !important;
+}
+
+#form {
+  border-top: 1px solid rgb(212, 212, 212);
+  background: white;
+  width: 100%;
+  height: 15%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+}
+
+#form input {
+  height: 25px;
+  width: 100%
+}
+
+.dedicatedRoom {
+display: flex;
+flex-direction: column;
+height: calc(100vh - 160px);
+}
+
+.messages {
+  flex-grow: 1;
+  background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ), url(/images/bg.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
 }
