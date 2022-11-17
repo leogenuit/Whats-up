@@ -1,0 +1,9 @@
+<h1>friends liste</h1>
+
+<p>{{oneUser.username}}</p>
+
+{{#each oneUser.friends}}
+
+  <p>{{this.friend.username}}</p>
+  <img src="{{this.friend.picture}}" alt="" />
+{{/each}}

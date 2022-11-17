@@ -1,13 +1,8 @@
 <div class="sticky">
   <div class="flex header">
-    <a href="/edit/picture"><img
-        class="user-picture"
-        src="{{currentUser.picture}}"
-        alt=""
-      /></a>
+    <img class="user-picture" src="{{currentUser.picture}}" alt="" />
     <p id="username">{{currentUser.username}}</p>
-    <a href="/edit/username">edit</a>
-    <a class="logout" class="arrow" href="/auth/login">Logout</a>
+    <a href="/edit"><img src="images/reglage.png" alt="" /></a>
   </div>
 </div>
 
@@ -18,6 +13,16 @@
     <button>Search</button>
 
   </form>
+
+  {{#if foundUser}}
+    <img src={{foundUser.picture}} alt="" />
+    <p>{{foundUser.username}}</p>
+    <form action="/users/{{foundUser._id}}/add" method="post"><input
+        type="submit"
+        value="Add"
+      /></form>
+  {{/if}}
+
 </div>
 <div class="allsroom">
 
@@ -34,8 +39,6 @@
     <input id="input" autocomplete="off" /><button>Send</button>
   </form>
 </div>
-
-<a href="/chatroom">chatroom</a>
 
 <template id="message-template">
   <div class="message-container">

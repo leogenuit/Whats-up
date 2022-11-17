@@ -26,8 +26,8 @@ app.use("/auth", authRoutes);
 const testRoutes = require("./routes/test.routes");
 app.use("/test", testRoutes);
 
-const profilRoutes = require("./routes/profil.routes");
-app.use("/", profilRoutes);
+const profileRoutes = require("./routes/profile.routes");
+app.use("/", profileRoutes);
 
 const chatroomRoutes = require("./routes/chatroom.routes");
 app.use("/", chatroomRoutes);
