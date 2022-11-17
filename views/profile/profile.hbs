@@ -2,26 +2,30 @@
   <div class="flex header">
     <img class="user-picture" src="{{currentUser.picture}}" alt="" />
     <p id="username">{{currentUser.username}}</p>
-    <a href="/edit"><img src="images/reglage.png" alt="" /></a>
+    <a href="/edit"><img src="./../images/reglage.png" alt="" /></a>
   </div>
 </div>
- <form action="/users/search" method="GET">
+
+
+<div class="friends">
+   <form action="/users/search" method="GET">
 
     <input type="search" name="username" placeholder="Search ..." id="search" />
-    <button>Search</button>
+    <button>🔍</button>
+
+
 
   </form>
-
-
+  <div class="friends-list">
   {{#if foundUser}}
     <img src={{foundUser.picture}} alt="" />
     <p>{{foundUser.username}}</p>
-    <form action="/users/{{foundUser._id}}/add" method="post"><input
-        type="submit"
-        value="Add"
-      /></form>
+    <form action="/users/{{foundUser._id}}/add" method="post" class="add-friend">
+    <button><img src="./../images/plus.png" alt=""></button>
+    </form>
   {{/if}}
-
+  </div>
+</div>
 {{!-- <div class="allsroom">
   </div> --}}
 

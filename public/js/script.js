@@ -8,6 +8,7 @@ const dedicatedRoom = document.querySelector(".dedicatedRoom");
 const messageTemplate = document.getElementById("message-template");
 const messagesContainer = document.querySelector(".messages");
 const back = document.querySelector(".back");
+const friends = document.querySelector(".friends");
 
 let socket = io();
 //let messages = document.querySelector(".messages");
@@ -33,6 +34,9 @@ socket.on("all users", (users, notConnectUsers) => {
     listUsers.appendChild(title);
   }
   users.forEach((element) => {
+    let title = document.createElement("h2");
+    title.textContent = "Connected now 😀";
+    listUsers.appendChild(title);
     let div = document.createElement("div");
     div.classList.add("room", "flex");
     div.dataset.id = element.user._id;
