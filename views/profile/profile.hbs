@@ -1,18 +1,32 @@
 <div class="sticky">
   <div class="flex header">
-    <a href="/update"><img
+    <a href="/edit/picture"><img
         class="user-picture"
         src="{{currentUser.picture}}"
         alt=""
       /></a>
     <p id="username">{{currentUser.username}}</p>
+    <a href="/edit/username">edit</a>
     <a class="logout" class="arrow" href="/auth/login">Logout</a>
   </div>
 </div>
 
+
 <div class="allsroom connected">
 </div>
 <div class="disconnected">
+
+<div>
+  <form action="/users/search" method="GET">
+
+    <input type="search" name="username" placeholder="Search ..." id="search" />
+    <button>Search</button>
+
+  </form>
+</div>
+<div class="allsroom">
+
+
 </div>
 
 <div class="dedicatedRoom hidden">
@@ -27,11 +41,9 @@
   </form>
 </div>
 
-
-
 <template id="message-template">
   <div class="message-container">
-    <img src="" alt="">
+    <img src="" alt="" />
     <div class="message-content">
       <p></p>
       <small></small>

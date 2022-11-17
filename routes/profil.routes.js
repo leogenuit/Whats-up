@@ -3,6 +3,7 @@ const router = express.Router();
 const isLoggedIn = require("../middleware/isLoggedIn");
 const uploader = require("../config/cloudinary.config");
 const User = require("../models/User.model");
+
 router.get("/", isLoggedIn, (req, res, next) => {
   res.render("profile/profile", {
     script: ["script", "socket"],
@@ -10,9 +11,9 @@ router.get("/", isLoggedIn, (req, res, next) => {
   });
 });
 
-router.get("/update", isLoggedIn, (req, res, next) => {
+router.get("/edit/picture", isLoggedIn, (req, res, next) => {
   try {
-    res.render("profile/profile-edit", { pagecss: "profile-edit.css" });
+    res.render("profile/edit-picture", { pagecss: "profile-edit.css" });
   } catch (error) {
     next(error);
   }
@@ -43,5 +44,32 @@ router.post(
     res.redirect("/");
   }
 );
+
+router.get("/edit/username", async (req, res, next) => {
+  try {
+    //const user = await User.findById(req.params.id);
+
+    res.render("profile/edit-username");
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/edit/username", async (req, res, next) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.session.currentUser._id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    req.session.currentUser = updatedUser;
+
+    res.redirect("/");
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
