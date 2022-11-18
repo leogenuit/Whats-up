@@ -1,22 +1,29 @@
 const express = require("express");
-const session = require("express-session");
 const router = express.Router();
 const User = require("../models/User.model");
 
 router.get("/users/all", async (req, res) => {
-  const user = await User.find();
-  res.render("all-users", { user });
+  try {
+    const user = await User.find();
+    res.render("all-users", { user });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get("/users/search", async (req, res) => {
   const { username } = req.query;
-  const filterUser = await User.findOne({ username });
-  console.log(filterUser);
-  res.render("profile/profile", {
-    foundUser: filterUser,
-    script: ["script", "socket"],
-    pagecss: "profile.css",
-  });
+  try {
+    const filterUser = await User.findOne({ username });
+    console.log(filterUser);
+    res.render("profile/profile", {
+      foundUser: filterUser,
+      script: ["script", "socket"],
+      pagecss: "profile.css",
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post("/users/:id/add", async (req, res, next) => {
