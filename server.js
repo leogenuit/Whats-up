@@ -28,13 +28,13 @@ io.on("connection", (socket) => {
     socket.emit("all users disconnected", users);
   });
 
-  io.of("/").adapter.on("join-room", (room, id) => {
-    console.log(`socket ${id} has joined room ${room}`);
-  });
+  // io.of("/").adapter.on("join-room", (room, id) => {
+  //   console.log(`socket ${id} has joined room ${room}`);
+  // });
   socket.on("chatroom on", async (foreignId, userId) => {
     const chatroom = await openChatroom(foreignId, userId);
-    console.log("heeeey");
-    socket.emit("one chatroom", chatroom);
+    // console.log("heeeey");
+    socket.emit("one chatroom", { chatroom, foreignId, id: userId });
   });
 
   socket.on("some room", async (foreignId, userId) => {
@@ -44,10 +44,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("chat message", async (msg, id, foreignId, room) => {
-    console.log(foreignId);
+    //console.log(foreignId);
     //const receiver = await fetchSocket(foreignId);
-    const message = await createNewMessage(msg, id, foreignId);
-    console.log(message);
+    const message = await createNewMessage(msg, id, foreignId, room);
+    //console.log(message);
     //io.to(receiver).emit("chat message", message);
     io.emit("chat message", { message, foreignId, id, room });
   });
@@ -58,9 +58,9 @@ io.on("connection", (socket) => {
   //   io.emit("private message", message);
   // });
 
-  socket.on("get messages", async (id, foreignId) => {
+  socket.on("get messages", async (id, foreignId, room) => {
     const message = await getAllMessages(id, foreignId);
-    io.emit("all messages", message);
+    io.emit("all messages", message, room, [id, foreignId]);
   });
 });
 
@@ -100,10 +100,12 @@ async function getUsers(userId) {
 }
 
 async function openChatroom(foreignId, userId) {
+  console.log(foreignId, userId);
   if (!foreignId || !userId) return;
   const chatroom = await Chatroom.findOne({
     users: { $all: [foreignId, userId] },
   });
+
   if (chatroom) {
     return chatroom;
   } else {
@@ -119,10 +121,15 @@ async function getChatroom(foreignId, userId) {
   return greyChatroom;
 }
 
-async function createNewMessage(msg, id, foreignId) {
-  const getChatroom = await Chatroom.findOne({
-    users: { $all: [foreignId, id] },
-  }).populate("users");
+async function createNewMessage(msg, id, foreignId, room) {
+  // const getChatroom = await Chatroom.findOne({
+  //   users: { $all: [foreignId, id] },
+  // }).populate("users");
+  const getChatroom = await Chatroom.findById(room).populate("users");
+  console.log(
+    "Found ChatRoom ====================================  \n",
+    getChatroom
+  );
 
   const createdMessage = await Message.create({
     content: msg,
@@ -136,14 +143,14 @@ async function getAllMessages(id, foreignId) {
   const getChatroom = await Chatroom.findOne({
     users: { $all: [id, foreignId] },
   }).populate("users");
-  console.log(getChatroom.id);
+  console.log(getChatroom);
   if (!getChatroom) {
     return [];
   } else {
     const allMessages = await Message.find({
       chatroom: getChatroom.id,
     }).populate("author");
-    console.log(allMessages);
+    // console.log(allMessages);
     return allMessages;
   }
 }
