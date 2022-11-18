@@ -42,16 +42,20 @@ router.post(
   isLoggedIn,
   uploader.single("picture"),
   async (req, res, next) => {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.session.currentUser._id,
-      {
-        picture: req.file.path,
-      },
-      { new: true }
-    );
-    req.session.currentUser = updatedUser;
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.session.currentUser._id,
+        {
+          picture: req.file.path,
+        },
+        { new: true }
+      );
+      req.session.currentUser = updatedUser;
 
-    res.redirect("/");
+      res.redirect("/");
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
@@ -67,8 +71,12 @@ router.get("/:id/delete", async (req, res, next) => {
 router.get("/socket/:id", async (req, res, next) => {
   const { id } = req.params;
   console.log(id);
-  const user = await Connected.findOne({ user: id });
-  console.log(user);
-  return res.json(user);
+  try {
+    const user = await Connected.findOne({ user: id });
+    console.log(user);
+    return res.json(user);
+  } catch (error) {
+    next(error);
+  }
 });
 module.exports = router;
