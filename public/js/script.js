@@ -32,11 +32,13 @@ socket.on("all users", (users, notConnectUsers) => {
     let title = document.createElement("h2");
     title.textContent = "No one connected 🙃";
     listUsers.appendChild(title);
-  }
-  users.forEach((element) => {
+  } else {
     let title = document.createElement("h2");
     title.textContent = "Connected now 😀";
     listUsers.appendChild(title);
+  }
+
+  users.forEach((element) => {
     let div = document.createElement("div");
     div.classList.add("room", "flex");
     div.dataset.id = element.user._id;
@@ -90,13 +92,13 @@ socket.on("all users", (users, notConnectUsers) => {
   });
 });
 
-socket.on("all messages", function (msg) {
+socket.on("all messages", function (message) {
   allRooms.classList.add("hidden");
   listUsersNotConnected.classList.add("hidden");
   friends.classList.add("hidden");
   dedicatedRoom.classList.remove("hidden");
   messagesContainer.innerHTML = "";
-  msg.forEach((element) => {
+  message.forEach((element) => {
     console.log(element);
     formatMessage(element);
   });
@@ -109,9 +111,11 @@ socket.on("all messages", function (msg) {
   });
 });
 
-socket.on("chat message", function ({ message, foreignId }) {
+socket.on("chat message", function ({ message, foreignId, id, room }) {
   console.log(message);
-  if (foreignId !== userId) return;
+  // if (room !== messagesContainer.dataset.room) {
+  //   return;
+  // }
   formatMessage(message);
 });
 
