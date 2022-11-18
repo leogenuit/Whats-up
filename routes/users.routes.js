@@ -45,7 +45,7 @@ router.get("/users/friends", async (req, res, next) => {
       "friends.friend"
     );
     console.log(oneUser.friends);
-    res.render("friendsList", { oneUser });
+    res.render("friendsList", { oneUser, pagecss: "friendsList.css" });
   } catch (error) {
     next(error);
   }
