@@ -45,13 +45,6 @@ socket.on("all users", (users, notConnectUsers) => {
     div.textContent = element.user.username;
     listUsers.appendChild(div);
 
-    div.addEventListener("click", async function (e) {
-      e.preventDefault();
-      // const id = await fetchSocket(div.dataset.id);
-      socket.emit("chatroom on", div.dataset.id, userId);
-      socket.emit("get messages", userId, div.dataset.id);
-    });
-
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (input.value) {
@@ -75,8 +68,29 @@ socket.on("all users", (users, notConnectUsers) => {
       //   input.value = "";
       // }
     });
+
+    div.addEventListener("click", async function (e) {
+      e.preventDefault();
+      // const id = await fetchSocket(div.dataset.id);
+      socket.emit(
+        "chatroom on",
+        div.dataset.id,
+        userId,
+        messagesContainer.dataset.room
+      );
+      console.log(messagesContainer.dataset.room);
+      if (messagesContainer.dataset.room) {
+        socket.emit(
+          "get messages",
+          userId,
+          div.dataset.id,
+          messagesContainer.dataset.room
+        );
+      }
+    });
   });
 
+  socket.on();
   notConnectUsers.forEach((element) => {
     let div = document.createElement("div");
     div.classList.add("room", "flex", "grey");
@@ -87,20 +101,24 @@ socket.on("all users", (users, notConnectUsers) => {
     div.addEventListener("click", function (e) {
       e.preventDefault();
       socket.emit("some room", div.dataset.id, userId);
+      console.log("", messagesContainer.dataset.room);
       socket.emit("get messages", div.dataset.id, userId);
     });
   });
 });
 
-socket.on("all messages", function (message) {
+socket.on("all messages", function (message, room, participant) {
+  console.log(message);
+  if (!participant.includes(userId)) return;
   allRooms.classList.add("hidden");
   listUsersNotConnected.classList.add("hidden");
   friends.classList.add("hidden");
   dedicatedRoom.classList.remove("hidden");
   messagesContainer.innerHTML = "";
   message.forEach((element) => {
-    console.log(element);
+    // if (element.chatroom === messagesContainer.dataset.room) {
     formatMessage(element);
+    // }
   });
   back.addEventListener("click", function (e) {
     e.preventDefault();
@@ -112,18 +130,26 @@ socket.on("all messages", function (message) {
 });
 
 socket.on("chat message", function ({ message, foreignId, id, room }) {
-  console.log(message);
-  // if (room !== messagesContainer.dataset.room) {
-  //   return;
-  // }
+  if (room !== messagesContainer.dataset.room) {
+    return;
+  }
   formatMessage(message);
 });
 
 socket.on("delete user", (user) => {
   //console.log(user);
 });
-socket.on("one chatroom", (room) => {
-  messagesContainer.dataset.room = room._id;
+socket.on("one chatroom", ({ chatroom, foreignId, id }) => {
+  console.table({ userId, id, foreignId, chatroom });
+  if (userId === id || userId === foreignId) {
+    messagesContainer.dataset.room = chatroom._id;
+  }
+  socket.emit(
+    "get messages",
+    userId,
+    userId === id ? foreignId : id,
+    messagesContainer.dataset.room
+  );
 });
 
 function formatMessage(element) {
@@ -131,6 +157,7 @@ function formatMessage(element) {
   clone.querySelector("img").src = element.author.picture;
   clone.querySelector("p").textContent = element.content;
   clone.querySelector("small").textContent = element.createdAt;
+  //messagesContainer.dataset.room = element.chatroom;
   messagesContainer.append(clone);
 }
 
