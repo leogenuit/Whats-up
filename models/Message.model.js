@@ -10,7 +10,6 @@ const messageSchema = new Schema(
     content: {
       type: String,
       required: true,
-      unique: true,
     },
     chatroom: {
       type: Schema.Types.ObjectId,
