@@ -227,3 +227,20 @@ small {
   background: none;
   border: none;
 }
+
+.allfriends-div {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.allfriends {
+  width: 25%;
+  text-align: center;
+  text-decoration: none;
+  color: #0697db;
+  background: white;
+  text-transform: capitalize;
+  border-radius: 20px;
+  padding: 5px;
+}
