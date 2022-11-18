@@ -45,7 +45,8 @@ git push --set-upstream origin lastPush
 </div> }}
 
 <div class="dedicatedRoom hidden">
-  <button class="back">❌</button>
+
+   <button class="back"><img src="./../images/arrow.png"></button>
   <div class="messages"></div>
   <form
     id="form"
@@ -53,7 +54,7 @@ git push --set-upstream origin lastPush
     data-id="{{currentUser._id}}"
     data-username="{{currentUser.username}}"
   >
-    <input id="input" autocomplete="off" /><button>Send</button>
+    <textarea id="input" autocomplete="off" type ="text"></textarea><button><img src="./../images/share.png"></button>
   </form>
 </div>
 
