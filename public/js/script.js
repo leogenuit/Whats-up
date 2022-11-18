@@ -93,6 +93,7 @@ socket.on("all users", (users, notConnectUsers) => {
 socket.on("all messages", function (msg) {
   allRooms.classList.add("hidden");
   listUsersNotConnected.classList.add("hidden");
+  friends.classList.add("hidden");
   dedicatedRoom.classList.remove("hidden");
   messagesContainer.innerHTML = "";
   msg.forEach((element) => {
@@ -104,12 +105,14 @@ socket.on("all messages", function (msg) {
     allRooms.classList.remove("hidden");
     listUsersNotConnected.classList.remove("hidden");
     dedicatedRoom.classList.add("hidden");
+    friends.classList.remove("hidden");
   });
 });
 
-socket.on("chat message", function (msg) {
-  console.log(msg);
-  formatMessage(msg);
+socket.on("chat message", function ({ message, foreignId }) {
+  console.log(message);
+  if (foreignId !== userId) return;
+  formatMessage(message);
 });
 
 socket.on("delete user", (user) => {

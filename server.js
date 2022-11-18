@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
     const message = await createNewMessage(msg, id, foreignId);
     console.log(message);
     //io.to(receiver).emit("chat message", message);
-    io.emit("chat message", message);
+    io.emit("chat message", { message, foreignId });
   });
 
   // socket.on("private message", async (id, foreignId, msg) => {

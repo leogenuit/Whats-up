@@ -40,3 +40,16 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+
+/*
+*/
+
+.link p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.link a {
+color: blue;
+}
