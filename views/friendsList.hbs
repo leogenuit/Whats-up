@@ -1,9 +1,8 @@
 <h1>My friends</h1>
 
-
-
 {{#each oneUser.friends}}
-
-  <p>{{this.friend.username}}</p>
-  <img src="{{this.friend.picture}}" alt="" />
+  <div class="card">
+    <p>{{this.friend.username}}</p>
+    <img src="{{this.friend.picture}}" alt="" />
+  </div>
 {{/each}}

@@ -1,0 +1,26 @@
+body {
+  background: url("/images/bg-minion.jpeg");
+}
+h1 {
+  text-align: center;
+  text-transform: capitalize;
+  margin-top: 60px;
+}
+p {
+  text-transform: capitalize;
+  text-align: center;
+}
+img {
+  width: 50px;
+  height: 50px;
+}
+.card {
+  background: white;
+  display: flex;
+  border: 1px solid black;
+  width: 130px;
+  height: 130px;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 1px 6px black;
+}
